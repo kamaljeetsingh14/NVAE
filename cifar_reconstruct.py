@@ -56,7 +56,11 @@ images = images.to(device)
 # 4. Forward pass / reconstruction
 # --------------------------
 with torch.no_grad():
-    recon = model(images)
+    output = model(images)  # e.g., (recon, logits, extra_info)
+    if isinstance(output, tuple):
+        recon = output[0]   # first element is the reconstructed images
+    else:
+        recon = output
 
 # Denormalize back to [0,1]
 images_vis = (images + 0.5).clamp(0, 1)
