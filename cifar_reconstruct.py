@@ -56,7 +56,7 @@ images = images.to(device)
 # 4. Forward pass / reconstruction
 # --------------------------
 with torch.no_grad():
-    recon, _, _ = model(images)
+    recon = model(images)
 
 # Denormalize back to [0,1]
 images_vis = (images + 0.5).clamp(0, 1)
